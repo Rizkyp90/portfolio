@@ -1,6 +1,3 @@
-// Import gambar lokal dari folder assets.
-// PENTING: pastikan file "compro-kki.png" benar-benar ada di src/assets/images/
-// Kalau nama filenya beda, sesuaikan juga baris import di bawah ini.
 import comproKki from '../assets/images/compro-kki.png';
 import comproKki2 from '../assets/images/compro-kki-2.png';
 import cms from '../assets/images/cms.png';
