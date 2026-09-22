@@ -1,13 +1,54 @@
-// src/components/Contact.js (Optimasi Mobile & Instagram)
+// src/components/Contact.jsx
 
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Linkedin, Github, MapPin, Instagram } from 'lucide-react';
+import { Mail, Linkedin, Github, MapPin, Instagram, Loader2, CheckCircle2, XCircle } from 'lucide-react';
+
+// GANTI dengan access key kamu dari https://web3forms.com (gratis, tinggal masukin email, dapet key via email)
+const WEB3FORMS_ACCESS_KEY = '73686f28-21f6-4939-9105-848a14de12f5';
 
 const Contact = () => {
   const itemVariants = {
     initial: { opacity: 0, y: 30 },
     animate: { opacity: 1, y: 0 },
+  };
+
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  // status: 'idle' | 'sending' | 'success' | 'error'
+  const [status, setStatus] = useState('idle');
+
+  const handleChange = (e) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus('sending');
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: `Pesan baru dari ${formData.name} (Portfolio)`,
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setStatus('success');
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        setStatus('error');
+      }
+    } catch (err) {
+      setStatus('error');
+    }
   };
 
   return (
@@ -44,15 +85,15 @@ const Contact = () => {
         >
           <h3 className="text-xl md:text-2xl font-bold mb-6 text-white">Send Me a Message</h3>
           
-          <form name="contact" method="POST" data-netlify="true" className="space-y-5 md:space-y-6">
-            <input type="hidden" name="form-name" value="contact" />
-
+          <form onSubmit={handleSubmit} className="space-y-5 md:space-y-6">
             <div>
               <label htmlFor="name" className="block text-xs md:text-sm font-medium text-gray-400 mb-2 uppercase tracking-wider">Name</label>
               <input 
                 type="text" 
                 id="name" 
                 name="name"
+                value={formData.name}
+                onChange={handleChange}
                 placeholder="Your Name"
                 required
                 className="w-full px-4 py-3.5 bg-gray-900 border border-gray-800 rounded-xl focus:border-primary focus:ring-1 focus:ring-primary text-white outline-none transition-all placeholder:text-gray-600"
@@ -65,6 +106,8 @@ const Contact = () => {
                 type="email" 
                 id="email" 
                 name="email"
+                value={formData.email}
+                onChange={handleChange}
                 placeholder="your@email.com"
                 required
                 className="w-full px-4 py-3.5 bg-gray-900 border border-gray-800 rounded-xl focus:border-primary focus:ring-1 focus:ring-primary text-white outline-none transition-all placeholder:text-gray-600"
@@ -76,6 +119,8 @@ const Contact = () => {
               <textarea 
                 id="message" 
                 name="message"
+                value={formData.message}
+                onChange={handleChange}
                 rows="4"
                 placeholder="Tell me about your project..."
                 required
@@ -85,10 +130,23 @@ const Contact = () => {
 
             <button 
               type="submit" 
-              className="w-full px-6 py-4 text-base md:text-lg font-bold rounded-xl text-black bg-primary hover:bg-white transition-all duration-300 shadow-lg shadow-primary/20 active:scale-[0.98]"
+              disabled={status === 'sending'}
+              className="w-full px-6 py-4 text-base md:text-lg font-bold rounded-xl text-black bg-primary hover:bg-white transition-all duration-300 shadow-lg shadow-primary/20 active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
-              Send Message
+              {status === 'sending' && <Loader2 size={20} className="animate-spin" />}
+              {status === 'sending' ? 'Sending...' : 'Send Message'}
             </button>
+
+            {status === 'success' && (
+              <p className="flex items-center gap-2 text-green-400 text-sm font-medium">
+                <CheckCircle2 size={18} /> Pesan berhasil dikirim! Terima kasih sudah menghubungi saya.
+              </p>
+            )}
+            {status === 'error' && (
+              <p className="flex items-center gap-2 text-red-400 text-sm font-medium">
+                <XCircle size={18} /> Gagal mengirim pesan. Coba lagi atau email langsung ke kputra479@gmail.com.
+              </p>
+            )}
           </form>
         </motion.div>
 

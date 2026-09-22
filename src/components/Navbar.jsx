@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
-import { Menu, X, Download } from 'lucide-react'; // Import ikon Download
+import { Menu, X, Download } from 'lucide-react'; 
+import cvFile from '../assets/Cv-rizky.pdf';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -21,7 +22,7 @@ const Navbar = () => {
   ];
 
   // Ganti ini dengan path file CV Anda yang sebenarnya
-  const cvDownloadLink = '/path/to/your/cv.pdf'; 
+  const cvDownloadLink = cvFile; 
 
   return (
     <nav 
