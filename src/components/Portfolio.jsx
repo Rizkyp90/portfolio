@@ -34,7 +34,7 @@ const Portfolio = () => {
   }, [activeTab]);
 
   return (
-    <div className="relative bg-white dark:bg-darker transition-colors duration-500">
+    <div className="relative bg-darker transition-colors duration-500">
       <ScrollProgress />
       <Navbar />
       
@@ -53,7 +53,7 @@ const Portfolio = () => {
             transition={{ duration: 0.8 }}
             className="mb-8 md:mb-12"
           >
-            <h2 className="text-2xl md:text-5xl font-bold mb-3 text-dark dark:text-white">
+            <h2 className="text-2xl md:text-5xl font-bold mb-3 text-white">
               <span className="text-primary">04.</span> Portfolio
             </h2>
             <div className="h-1 w-16 md:w-20 bg-primary mb-8 md:mb-12" />
@@ -67,7 +67,7 @@ const Portfolio = () => {
                   className={`relative px-5 py-1.5 md:px-6 md:py-2 rounded-full text-xs md:text-sm font-medium transition-all duration-300 border ${
                     activeTab === cat
                       ? 'border-primary text-black'
-                      : 'border-white/10 text-gray-500 dark:text-gray-400 hover:text-primary hover:border-primary/50'
+                      : 'border-white/10 text-gray-400 hover:text-primary hover:border-primary/50'
                   }`}
                 >
                   <span className="relative z-10">{cat}</span>
@@ -86,7 +86,7 @@ const Portfolio = () => {
           {/* --- Grid Projects --- */}
           <motion.div 
             layout
-            className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
           >
             <AnimatePresence mode="popLayout">
               {filteredProjects.map((project) => (

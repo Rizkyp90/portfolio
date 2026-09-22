@@ -23,6 +23,10 @@
 }
 
 @layer base {
+  html {
+    color-scheme: dark;
+  }
+
   body {
     background-color: var(--color-dark);
     color: white;

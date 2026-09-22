@@ -9,13 +9,14 @@ import waleads from '../assets/images/waleads.png';
 import finsync from '../assets/images/finsync.png';
 import brand from '../assets/images/product.png';
 import poshier from '../assets/images/poshier.png';
+import reorderly from '../assets/images/reorderly.png';
 
 
 export const projects = [
   {
     id: 1,
     title: "Company Profile KKI",
-    category: "Web Application",
+    category: "Company Profile",
     images: [
       comproKki,
       comproKki2,
@@ -39,7 +40,7 @@ export const projects = [
   {
     id: 3,
     title: "Waleads Chat Management",
-    category: "AI Tool",
+    category: "Web Application",
     images: [
       waleads,
     ],
@@ -50,7 +51,7 @@ export const projects = [
   {
     id: 4,
     title: "Product Landing Page",
-    category: "Web Application",
+    category: "Landing Page",
     images: [
       brand,
     ],
@@ -61,7 +62,7 @@ export const projects = [
   {
     id: 5,
     title: "Finsync Financial Synchronization",
-    category: "AI Tool",
+    category: "Web Application ",
     images: [
       finsync,
     ],
@@ -79,5 +80,16 @@ export const projects = [
     description: "Aplikasi Point of Sale (POS) untuk mitra perusahaan yang sudah dilengkapi menu dari brand mitra masing-masing, sehingga mitra tinggal langsung menggunakannya tanpa perlu setup manual dari awal.",
     tags: ["Flutter", "Go", "Postgresql"],
     link: "https://poshier.kulinerkreasindoinovasi.com"
+  },
+  {
+    id: 7,
+    title: "Reorderly",
+    category: "Web Application",
+    images: [
+      reorderly,
+    ],
+    description: "Platform pemesanan ulang (reorder) bahan baku dari mitra ke perusahaan, yang secara otomatis membuat sale order langsung ke Odoo setelah pesanan dikonfirmasi.",
+    tags: ["svelte", "Tailwind"],
+    link: "https://reorderly.kulinerkreasindoinovasi.com/"
   }
 ];
